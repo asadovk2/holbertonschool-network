@@ -4,7 +4,7 @@
 # - facebook.com resolves to 8.8.8.8
 
 # Replace localhost entry
-sudo sed -i 's/^127\.0\.0\.1\s\+localhost/127.0.0.2 localhost/' /etc/hosts
+sudo sed -i 's/^127\.0\.0\.1\s\+\(.*\blocalhost\b.*\)/127.0.0.2 \1/' /etc/hosts
 
 # Add or replace facebook.com entry
 sudo sed -i '/facebook.com/d' /etc/hosts
