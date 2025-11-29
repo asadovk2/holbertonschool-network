@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script listens on localhost:98 and prints any text received from clients
+
+set -euo pipefail
+
+# Listen on 127.0.0.2 port 98 (requires sudo for ports <1024)
+sudo nc -l 127.0.0.2 98
