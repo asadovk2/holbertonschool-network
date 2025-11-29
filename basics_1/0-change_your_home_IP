@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# This script configures an Ubuntu server so that:
-# - localhost resolves to 127.0.0.2
-# - facebook.com resolves to 8.8.8.8
 
-# Replace localhost entry
-sudo sed -i 's/^127\.0\.0\.1\s\+\(.*\blocalhost\b.*\)/127.0.0.2 \1/' /etc/hosts
+# Backup current hosts
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Remove any localhost lines and add the new one
+grep -v 'localhost' /etc/hosts | sudo tee /etc/hosts.tmp > /dev/null
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts.tmp > /dev/null
+sudo mv /etc/hosts.tmp /etc/hosts
 
 # Add or replace facebook.com entry
-sudo sed -i '/facebook.com/d' /etc/hosts
-echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
+grep -v 'facebook.com' /etc/hosts | sudo tee /etc/hosts.tmp > /dev/null
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts.tmp > /dev/null
+sudo mv /etc/hosts.tmp /etc/hosts
